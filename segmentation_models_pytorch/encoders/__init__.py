@@ -105,7 +105,7 @@ def get_preprocessing_params(encoder_name, pretrained="imagenet"):
         settings = all_settings[pretrained]
 
     formatted_settings = {}
-    formatted_settings["input_space"] = settings.get("input_space", "RGB")
+    # formatted_settings["input_space"] = settings.get("input_space", "RGB")
     formatted_settings["input_range"] = list(settings.get("input_range", [0, 1]))
     formatted_settings["mean"] = list(settings.get("mean"))
     formatted_settings["std"] = list(settings.get("std"))
