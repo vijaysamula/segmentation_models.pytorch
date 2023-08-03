@@ -6,6 +6,7 @@ from . import metrics
 
 from .decoders.unet import Unet
 from .decoders.unet_count import UnetCount
+from .decoders.unet_stem_seg import UnetStemSeg
 from .decoders.unetplusplus import UnetPlusPlus
 from .decoders.manet import MAnet
 from .decoders.linknet import Linknet
@@ -35,6 +36,7 @@ def create_model(
 
     archs = [
         Unet,
+        UnetStemSeg,
         UnetCount,
         UnetPlusPlus,
         MAnet,
