@@ -74,7 +74,7 @@ class UnetStemSeg(SegmentationModelWithStem):
             depth=encoder_depth,
             weights=encoder_weights,
         )
-
+        decoder_channels_stem = [256,128]
         self.decoderSeg = UnetDecoder(
             encoder_channels=self.encoder.out_channels,
             decoder_channels=decoder_channels,
@@ -85,8 +85,8 @@ class UnetStemSeg(SegmentationModelWithStem):
         )
         self.decoderStem = UnetDecoder(
             encoder_channels=self.encoder.out_channels,
-            decoder_channels=decoder_channels,
-            n_blocks=encoder_depth,
+            decoder_channels=decoder_channels_stem,
+            n_blocks=2,
             use_batchnorm=decoder_use_batchnorm,
             center=True if encoder_name.startswith("vgg") else False,
             attention_type=decoder_attention_type,
@@ -99,10 +99,10 @@ class UnetStemSeg(SegmentationModelWithStem):
             kernel_size=3,
         )
         self.stem_segmentation_head = SegmentationHead(
-            in_channels=decoder_channels[-1],
+            in_channels=decoder_channels_stem[-1],
             out_channels=classes,
             activation=activation,
-            kernel_size=3,
+            kernel_size=3, 
         )
 
         if aux_params is not None:
