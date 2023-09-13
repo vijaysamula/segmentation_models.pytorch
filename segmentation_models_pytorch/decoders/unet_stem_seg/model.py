@@ -63,6 +63,7 @@ class UnetStemSeg(SegmentationModelWithStem):
         decoder_attention_type: Optional[str] = None,
         in_channels: int = 3,
         classes: int = 1,
+        stem_classes: int = 1,
         activation: Optional[Union[str, callable]] = None,
         aux_params: Optional[dict] = None,
     ):
@@ -100,7 +101,7 @@ class UnetStemSeg(SegmentationModelWithStem):
         )
         self.stem_segmentation_head = SegmentationHead(
             in_channels=decoder_channels[-1],
-            out_channels=classes,
+            out_channels=stem_classes,
             activation=activation,
             kernel_size=3,
         )
